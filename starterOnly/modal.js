@@ -10,7 +10,7 @@ const inputFirstName = document.getElementById("first");
 const inputLastName = document.getElementById("last");
 const inputEmail = document.getElementById("email");
 const inputBirthdate = document.getElementById("birthdate");
-const inputquantity = document.getElementById("quantity");
+const inputQuantity = document.getElementById("quantity");
 const inputcheckbox1 = document.getElementById("checkbox1");
 const inputcheckbox2 = document.getElementById("checkbox2");
 const inputsRadio = document.querySelectorAll('input[type="radio"]')
@@ -66,18 +66,58 @@ const validForm = event => {
 // Vérification que le champ n'est pas vide
   const isLastNameNotEmpty = inputLastName.value.trim() !== '';
 
-  //EMAIL
+// EMAIL
 
-  // Validation du champ email
-  const isEmailNotEmpty = inputEmail.value.trim() !== '';
-  const isValidEmail = isEmailNotEmpty && isValidEmailAddress(inputEmail.value);
-  inputEmail.parentNode.setAttribute("data-error-visible", !isValidEmail);
+// Validation du champ email
+const isEmailNotEmpty = inputEmail.value.trim() !== '';
+const isValidEmail = isEmailNotEmpty && /^[A-Za-z0-9.!\#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$/.test(inputEmail.value);
+inputEmail.parentNode.setAttribute("data-error-visible", !isValidEmail);
 };
+//DATE DE NAISSANCE
 
-// Fonction pour valider une adresse email
-const inputDateOfBirth = document.querySelector('#birthdate');
+const inputDateOfBirth = inputBirthdate;
 
-// Ajouter un gestionnaire d'événements pour intercepter les frappes clavier
+// Validation du champ date de naissance
+const isDateOfBirthValid = inputDateOfBirth.checkValidity();
+
+// Vérification du format de la date (YYYY-MM-DD)
+const isValidDateFormat = /^\d{4}-\d{2}-\d{2}$/.test(inputDateOfBirth.value);
+
+// Vérification que l'année n'est pas supérieure à 2010
+const enteredDate = new Date(inputDateOfBirth.value);
+const isYearBefore2010 = enteredDate.getFullYear() < 2010;
+
+// Initialisation de l'attribut "data-error-visible"
+inputDateOfBirth.parentNode.setAttribute("data-error-visible", false);
+
+
+// Écoute de l'événement "submit" du formulaire
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  // Vérification de la validité de la date de naissance
+  if (!isDateOfBirthValid || !isValidDateFormat || isYearBefore2010) {
+
+    // Affichage du message d'erreur
+    inputDateOfBirth.parentNode.setAttribute("data-error-visible", true);
+  }
+});
+
+// PARTICIPATION
+
+// Écoute de l'événement "submit" du formulaire
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const isQuantityNotEmpty = inputQuantity.value.trim() !== '';
+
+  // Mise à jour de l'attribut "data-error-visible" en fonction de la validité du champ
+  inputQuantity.parentNode.setAttribute("data-error-visible", !isQuantityNotEmpty);
+});
+
+
+
+
 
 
 
