@@ -1,3 +1,4 @@
+
 // DOM Elements
 const modalBg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -102,6 +103,8 @@ form.addEventListener("submit", (event) => {
     inputDateOfBirth.parentNode.setAttribute("data-error-visible", true);
   }
 });
+
+
 
 // PARTICIPATION
 
