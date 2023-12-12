@@ -45,13 +45,22 @@ form.addEventListener('submit', (event) => {
 
   // Vérifier si le formulaire est valide avant d'afficher le message de confirmation
   if (isFormValid()) {
-    // Cacher le formulaire en ajoutant la classe "hidden"
-    modalBg.classList.add('hidden');
+    // Cacher le formulaire en modifiant la propriété "display"
+    form.style.display = 'none';
 
-    // Afficher le message de confirmation en supprimant la classe "hidden"
-    confirmationMessage.classList.remove('hidden');
+    // Afficher le message de confirmation en modifiant la propriété "display"
+    confirmationMessage.style.display = 'block';
   }
 });
+
+const closeConfirmationBtn = document.getElementById('close-confirmation');
+
+closeConfirmationBtn.addEventListener('click', () => {
+  modalBg.style.display = 'none'; // Cacher le modal
+  confirmationMessage.classList.add('hidden'); // Cacher le message de confirmation
+});
+
+
 
 // Fonction pour vérifier si le formulaire est valide
 function isFormValid() {

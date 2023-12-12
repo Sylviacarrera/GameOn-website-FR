@@ -3,6 +3,19 @@
   display: none;
 }
 
+.btn-close {
+font-size: 145%;
+background: #fe142f;
+display: flex;
+margin: auto;
+padding: 2em;
+color: #fff;
+padding: 0.75rem 2.5rem;
+border-radius: 1rem;
+cursor: pointer;
+}
+
+
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
