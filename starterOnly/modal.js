@@ -19,16 +19,15 @@ const formDataRadio = document.getElementById('formData-radio')
 const confirmationMessage = document.getElementById('confirmation-message');
 
 // querySelector('input[name="pwd"]')
-/** Events **/
+
+/** Evenements **/
 menu.addEventListener('click', () => editNav())
-closeModalBg.addEventListener("click", () => closeModal()) // launch modal event
+//la fonction n'a pas de paramètres,j'utilise des parenthèses vides
+closeModalBg.addEventListener("click", () => closeModal()) 
 modalBtn.forEach(btn => btn.addEventListener("click", () => launchModal()));
-// submit form
-form.addEventListener('submit', event => validForm(event))
+
 
 // launch modal form
-const launchModal = () => modalBg.style.display = "block"
-const closeModal = () => modalBg.style.display = "none"
 const editNav = () => {
   if (myTopNav.className === "topnav") {
     myTopNav.className += " responsive";
@@ -36,22 +35,8 @@ const editNav = () => {
     myTopNav.className = "topnav";
   }
 }
-
-// Modifier la fonction de gestion de la soumission du formulaire
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  // ... Votre code de validation existant ...
-
-  // Vérifier si le formulaire est valide avant d'afficher le message de confirmation
-  if (isFormValid()) {
-    // Cacher le formulaire en modifiant la propriété "display"
-    form.style.display = 'none';
-
-    // Afficher le message de confirmation en modifiant la propriété "display"
-    confirmationMessage.style.display = 'block';
-  }
-});
+const closeModal = () => modalBg.style.display = "none"
+const launchModal = () => modalBg.style.display = "block"
 
 const closeConfirmationBtn = document.getElementById('close-confirmation');
 
@@ -60,27 +45,11 @@ closeConfirmationBtn.addEventListener('click', () => {
   confirmationMessage.classList.add('hidden'); // Cacher le message de confirmation
 });
 
+// submit form
+form.addEventListener('submit', event => validForm(event))
 
 
-// Fonction pour vérifier si le formulaire est valide
-function isFormValid() {
-  // Ajoutez ici des conditions supplémentaires si nécessaire
-  return (
-    inputFirstName.checkValidity() &&
-    inputLastName.checkValidity() &&
-    inputEmail.checkValidity() &&
-    inputBirthdate.checkValidity() &&
-    inputQuantity.checkValidity() &&
-    Array.from(inputsRadio).some(element => element.checked) &&
-    inputCheckbox1.checked
-  );
-}
-
-
-
-
-
-
+//CHAMPS FORMULAIRE
 
 const validForm = event => {
   event.preventDefault()
@@ -96,30 +65,32 @@ const validForm = event => {
   inputFirstName.parentNode.setAttribute("data-error-visible", inputFirstName.value.length < 2)
 
    // Vérification de la validité du prénom (lettres uniquement)
-  const isValidFirstName = /^[a-zA-Z]+$/.test(inputFirstName.value);
-  inputFirstName.parentNode.setAttribute("data-error-visible", !isValidFirstName);
+  const isValidFirstName = /^[a-zA-Z]+$/.test(inputFirstName.value)
+  inputFirstName.parentNode.setAttribute("data-error-visible", !isValidFirstName)
 
 // Vérification que le champ n'est pas vide
-  const isFirstNameNotEmpty = inputFirstName.value.trim() !== '';
+  const isFirstNameNotEmpty = inputFirstName.value.trim() !== ''
 
   //NOM
 
   inputLastName.parentNode.setAttribute("data-error-visible", inputLastName.value.length < 2)
 
  // Vérification de la validité du nom (lettres uniquement)
-  const isValidLastName = /^[a-zA-Z]+$/.test(inputLastName.value);
-  inputLastName.parentNode.setAttribute("data-error-visible", !isValidFirstName);
+  const isValidLastName = /^[a-zA-Z]+$/.test(inputLastName.value)
+  inputLastName.parentNode.setAttribute("data-error-visible", !isValidFirstName)
 
 // Vérification que le champ n'est pas vide
-  const isLastNameNotEmpty = inputLastName.value.trim() !== '';
+  const isLastNameNotEmpty = inputLastName.value.trim() !== ''
 
 // EMAIL
 
 // Validation du champ email
-const isEmailNotEmpty = inputEmail.value.trim() !== '';
-const isValidEmail = isEmailNotEmpty && /^[A-Za-z0-9.!\#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$/.test(inputEmail.value);
-inputEmail.parentNode.setAttribute("data-error-visible", !isValidEmail);
-};
+
+const isEmailNotEmpty = inputEmail.value.trim() !== ''
+const isValidEmail = isEmailNotEmpty && new RexExp("^[A-Za-z0-9.-_]+@[A-Za-z0-9.-_]+\\.+[A-Za-z0-9-]").test(inputEmail.value)
+inputEmail.parentNode.setAttribute("data-error-visible", !isValidEmail)
+}
+
 //DATE DE NAISSANCE
 
 const inputDateOfBirth = inputBirthdate;
@@ -129,16 +100,19 @@ inputDateOfBirth.parentNode.setAttribute("data-error-visible", false);
 
 // Écoute de l'événement "submit" du formulaire
 form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
   // Validation du champ date de naissance
   const isDateOfBirthValid = inputDateOfBirth.checkValidity();
+ 
 
   // Vérification si la date de naissance est vide ou supérieure à la date actuelle
-  const enteredDate = new Date(inputDateOfBirth.value);
-  const isDateEmptyOrFuture = !inputDateOfBirth.value || enteredDate > new Date();
+  const enteredDate = new Date(inputDateOfBirth.value)
+  const isDateEmptyOrFuture = !inputDateOfBirth.value || enteredDate > new Date()
 
-  // Mise à jour de l'attribut "data-error-visible"
+   // Vérifier si la date est valide (et que la chaîne n'était pas invalide) 
+  //  return !isNaN(date.getTime())
+
   inputDateOfBirth.parentNode.setAttribute("data-error-visible", !isDateOfBirthValid || isDateEmptyOrFuture);
 });
 
@@ -147,12 +121,13 @@ form.addEventListener("submit", (event) => {
 
 // Écoute de l'événement "submit" du formulaire
 form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
-  const isQuantityNotEmpty = inputQuantity.value.trim() !== '';
+  const isQuantityNotEmpty = inputQuantity.value.trim() !== ''
 
   // Mise à jour de l'attribut "data-error-visible" en fonction de la validité du champ
-  inputQuantity.parentNode.setAttribute("data-error-visible", !isQuantityNotEmpty);
+
+  inputQuantity.parentNode.setAttribute("data-error-visible", !isQuantityNotEmpty)
 });
 
 
@@ -160,15 +135,14 @@ form.addEventListener("submit", (event) => {
 
 // Écoute de l'événement "submit" du formulaire
 form.addEventListener('submit', (event) => {
-  // Validation des boutons radio
-  const isRadioChecked = Array.from(inputsRadio).some(element => element.checked);
-  formDataRadio.setAttribute("data-error-visible", !isRadioChecked);
+  event.preventDefault()
 
-  // Empêcher la soumission du formulaire si les boutons radio ne sont pas valides
-  if (!isRadioChecked) {
-    event.preventDefault();
-  }
-});
+  // Validation des boutons radio
+  const isRadioChecked = Array.from(inputsRadio).some(element => element.checked)
+  formDataRadio.setAttribute("data-error-visible", !isRadioChecked)
+
+    
+  })
 
 // CHECKBOX
 
@@ -179,8 +153,60 @@ form.addEventListener("submit", (event) => {
 
   // Affichage du message d'erreur si la case à cocher n'est pas sélectionnée
   if (!checkedCheckbox) {
-    inputCheckbox1.parentNode.setAttribute("data-error-visible", true);
+    inputCheckbox1.parentNode.setAttribute("data-error-visible",true);
   } else {
     inputCheckbox1.parentNode.removeAttribute("data-error-visible");
   }
+});
+
+// Modifier la fonction de gestion de la soumission du formulaire
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+
+
+  // Vérifier si le formulaire est valide avant d'afficher le message de confirmation
+  if (isFormValid()) {
+    // Cacher le formulaire en modifiant la propriété "display"
+    form.style.display = 'none';
+
+    // Afficher le message de confirmation en modifiant la propriété "display"
+    confirmationMessage.style.display = 'block';
+  }
+});
+// Fonction pour vérifier si le formulaire est valide
+function isFormValid() {
+  const isFirstNameValid = inputFirstName.checkValidity();
+  const isLastNameValid = inputLastName.checkValidity();
+  const isEmailValid = inputEmail.checkValidity();
+  const isDateOfBirthValid = inputDateOfBirth.checkValidity();
+  const isQuantityValid = inputQuantity.checkValidity();
+  const isRadioChecked = Array.from(inputsRadio).some(element => element.checked);
+  const isCheckboxChecked = inputCheckbox1.checked;
+
+  return (
+    isFirstNameValid &&
+    isLastNameValid &&
+    isEmailValid &&
+    isDateOfBirthValid &&
+    isQuantityValid &&
+    isRadioChecked &&
+    isCheckboxChecked
+  );
+}
+closeConfirmationBtn.addEventListener('click', () => {
+  // Afficher à nouveau le formulaire en modifiant la propriété "display"
+  form.style.display = 'block';
+
+  // Cacher le message de confirmation en modifiant la propriété "display"
+  confirmationMessage.style.display = 'none';
+
+  // Réinitialiser l'attribut "data-error-visible" pour chaque champ
+  Array.from(form.elements).forEach((field) => {
+    if (field.type !== 'submit' && field.type !== 'reset') {
+      field.parentNode.setAttribute('data-error-visible', false);
+    }
+  });
+
+  // Réinitialiser le formulaire 
+  form.reset();
 });

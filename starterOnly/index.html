@@ -13,12 +13,11 @@
 <body>
   <div class="topnav" id="myTopnav">
     <div class="header-logo">
-      <img alt="logo" src="Logo.png" width="auto" height="auto" />
+      <img alt="logo" src="Logo.png"" />
     </div>
     <div class="main-navbar">
 
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
+      <a href="#" class="active"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
       <a href="#"><span>Évènements passés</span></a>
@@ -28,7 +27,7 @@
     </div>
   </div>
   </div>
-  <main>
+  <main class="main-div">
     <div class="hero-section">
       <div class="hero-content">
         <h1 class="hero-headline">
@@ -58,7 +57,7 @@
           <form name="reserve">
             <div class="formData" data-error="Merci de saisir un prénom d'au moins 2 caractères">
               <label>Prénom</label><br>
-              <input class="text-control" type="text" id="first" name="first" minlength="2"  /><br>
+              <input class="text-control" type="text" id="first" name="first"  /><br>
             </div>
             <div class="formData"data-error="Merci de saisir un prénom d'au moins 2 caractères">
               <label>Nom</label><br>
@@ -74,7 +73,7 @@
             </div>
             <div class="formData" data-error="Merci de saisir le nombres de vos participations">
               <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-              <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+              <input type="number" class="text-control" id="quantity" name="quantity">
             </div>
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
             <div id="formData-radio" class="formData" data-error="Veuillez cocher au moins une case">
@@ -106,7 +105,7 @@
 
             <div class="formData"data-error="Veuillez accepter les conditions d'utilisations">
               <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
-              <label class="checkbox2-label" for="checkbox1" required>
+              <label class="checkbox2-label" for="checkbox1">
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.
               </label>
@@ -121,8 +120,14 @@
             <input class="btn-submit" type="submit" class="button" value="C'est parti" />
           </form>
           <div id="confirmation-message" class="hidden">
-            <p>Merci pour votre inscription !</p>
-            <button id="close-confirmation" class="btn-close">Fermer</button>
+            <div class="content txt-merci">
+              <p>
+                <span class="thanks">Merci pour</span><br>
+                votre inscription !
+              </p>
+              <input class="btn-submit" type="submit" class="button" id="close-confirmation" value="Fermer" />
+            </div>
+          </div>
           </div>
         </div>
       </div>
