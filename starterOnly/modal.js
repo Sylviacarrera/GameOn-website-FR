@@ -64,12 +64,12 @@ const validForm = event => {
 const isFormValid = () => {
   //PRENOM
   // Vérification de la validité du prénom (lettres uniquement)
-  const isValidFirstName = /^[a-zA-Z]+$/.test(inputFirstName.value)
+  const isValidFirstName = /^([a-zA-Z]){2,}$/.test(inputFirstName.value)
   inputFirstName.parentNode.setAttribute("data-error-visible", !isValidFirstName)
 
   //NOM
   // Vérification de la validité du nom (lettres uniquement)
-  const isValidLastName = /^[a-zA-Z]+$/.test(inputLastName.value)
+  const isValidLastName = /^([a-zA-Z]){2,}$/.test(inputLastName.value)
   inputLastName.parentNode.setAttribute("data-error-visible", !isValidLastName)
 
   // EMAIL
