@@ -34,6 +34,7 @@ const editNav = () => {
     myTopNav.className = "topnav";
   }
 }
+
 const closeModal = () => modalBg.style.display = "none"
 const launchModal = () => modalBg.style.display = "block"
 
@@ -64,12 +65,12 @@ const validForm = event => {
 const isFormValid = () => {
   //PRENOM
   // Vérification de la validité du prénom (lettres uniquement)
-  const isValidFirstName = /^([a-zA-Z]){2,}$/.test(inputFirstName.value)
+  const isValidFirstName = /^([a-zA-ZÀ-ÖØ-öø-ÿ]){2,}$/.test(inputFirstName.value)
   inputFirstName.parentNode.setAttribute("data-error-visible", !isValidFirstName)
 
   //NOM
   // Vérification de la validité du nom (lettres uniquement)
-  const isValidLastName = /^([a-zA-Z]){2,}$/.test(inputLastName.value)
+  const isValidLastName = /^([a-zA-ZÀ-ÖØ-öø-ÿ]){2,}$/.test(inputLastName.value)
   inputLastName.parentNode.setAttribute("data-error-visible", !isValidLastName)
 
   // EMAIL
@@ -95,7 +96,7 @@ const isFormValid = () => {
   inputQuantity.parentNode.setAttribute("data-error-visible", !isNumber)
 
   // RADIOS
-  // Validation des boutons radio
+  // Validation des boutons radio , transforme l'inputradio en tableau ce qui permet de constamment boucler dedans pour verifier constamment si quelque chose est coché
   const isRadioChecked = Array.from(inputsRadio).some(element => element.checked)
   formDataRadio.setAttribute("data-error-visible", !isRadioChecked)
 
